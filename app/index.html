@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HearthLedger — Household Budget</title>
+<meta name="description" content="HearthLedger keeps a household budget in one calm place: income, spending, category budgets, savings goals and monthly reports.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <a class="brand" href="#/">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6.5 10v9h11v-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9.5 19v-4.5h5V19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="brand-name">HearthLedger</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#/" data-route="dashboard">Dashboard</a>
+      <a href="#/transactions" data-route="transactions">Transactions</a>
+      <a href="#/budgets" data-route="budgets">Budgets</a>
+      <a href="#/goals" data-route="goals">Savings goals</a>
+      <a href="#/reports" data-route="reports">Reports</a>
+      <a href="#/settings" data-route="settings">Settings</a>
+    </nav>
+    <div class="side-card">
+      <p class="side-card-label">Safe to spend</p>
+      <p class="side-card-value" id="side-safe">—</p>
+      <p class="side-card-note" id="side-safe-note">Left this month after bills and budgets.</p>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="page-title">Dashboard</h1>
+        <p class="page-sub" id="page-sub">Your household money at a glance.</p>
+      </div>
+      <div class="top-actions">
+        <label class="month-pick">Month
+          <select id="month-select" aria-label="Choose month"></select>
+        </label>
+        <button class="btn btn-primary" id="add-tx-btn" type="button">+ Add transaction</button>
+      </div>
+    </header>
+    <section id="view" aria-live="polite"></section>
+    <footer class="foot">
+      <p>HearthLedger runs entirely in your browser. Your figures stay on this device.</p>
+    </footer>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="tx-modal" hidden>
+  <form class="modal" id="tx-form" method="dialog">
+    <h2 id="tx-form-title">Add transaction</h2>
+    <input type="hidden" id="tx-id">
+    <label>Kind
+      <select id="tx-kind">
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+    </label>
+    <label>Description
+      <input id="tx-desc" required maxlength="80" placeholder="Weekly groceries">
+    </label>
+    <div class="form-row">
+      <label>Amount
+        <input id="tx-amount" required type="number" min="0.01" step="0.01" placeholder="0.00">
+      </label>
+      <label>Date
+        <input id="tx-date" required type="date">
+      </label>
+    </div>
+    <div class="form-row">
+      <label>Category
+        <select id="tx-category"></select>
+      </label>
+      <label>Paid by
+        <select id="tx-member"></select>
+      </label>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="tx-cancel">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save transaction</button>
+    </div>
+  </form>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
